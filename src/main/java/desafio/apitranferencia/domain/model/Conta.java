@@ -1,31 +1,36 @@
 package desafio.apitranferencia.domain.model;
 
 import java.math.BigDecimal;
-import java.util.UUID;
 
 public class Conta {
-    private UUID id;
-    private String numero;
+    private Long id;
+    private Long numero;
     private BigDecimal saldo;
 
 
-    public Conta(UUID id, String numero, BigDecimal saldo) {
-        validate(id, numero, saldo);
+    public Conta(Long id, Long numero, BigDecimal saldo) {
+        validate(numero, saldo);
         this.id = id;
         this.numero = numero;
         this.saldo = saldo;
     }
 
-    public static Conta create(UUID id, String numero, BigDecimal saldo) {
-        final UUID uuid = UUID.randomUUID();
-        return new Conta(uuid, numero, saldo);
+    public Conta(Long numero, BigDecimal saldo) {
+        validate(numero, saldo);
+        this.numero = numero;
+        this.saldo = saldo;
     }
 
-    private void validate(UUID id, String numero, BigDecimal saldo) {
-        if (id == null) {
-            throw new IllegalArgumentException("ID nao pode ser nulo");
-        }
-        if (numero == null || numero.isEmpty()) {
+    public Conta(Long uuid) {
+        this.id = uuid;
+    }
+
+    public static Conta create(Long numero, BigDecimal saldo) {
+        return new Conta(numero, saldo);
+    }
+
+    private void validate(Long numero, BigDecimal saldo) {
+        if (numero == null) {
             throw new IllegalArgumentException("Numero da conta nao pode ser nulo ou vazio");
         }
         if (saldo == null || saldo.compareTo(BigDecimal.ZERO) < 0) {
@@ -33,19 +38,19 @@ public class Conta {
         }
     }
 
-    public UUID getId() {
+    public Long getId() {
         return id;
     }
 
-    public void setId(UUID id) {
+    public void setId(Long id) {
         this.id = id;
     }
 
-    public String getNumero() {
+    public Long getNumero() {
         return numero;
     }
 
-    public void setNumero(String numero) {
+    public void setNumero(Long numero) {
         this.numero = numero;
     }
 

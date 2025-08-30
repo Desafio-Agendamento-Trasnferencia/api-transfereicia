@@ -1,42 +1,50 @@
 package desafio.apitranferencia.domain.model;
 
+import java.math.BigDecimal;
 import java.time.LocalDate;
-import java.util.UUID;
 
 public class Transferencia {
-    UUID id;
+    Long id;
     Conta contaOrigem;
     Conta contaDestino;
-    Double valor;
+    BigDecimal valor;
     LocalDate dataAgendamento;
+    BigDecimal taxa;
     StatusTransferencia status;
 
-    public Transferencia(UUID id, Conta contaOrigem, Conta contaDestino, Double valor, LocalDate dataAgendamento, StatusTransferencia status) {
-        validate(id, contaOrigem, contaDestino, valor, dataAgendamento, status);
+    public Transferencia(Long id, Conta contaOrigem, Conta contaDestino, BigDecimal valor, LocalDate dataAgendamento, BigDecimal taxa, StatusTransferencia status) {
+        validate(contaOrigem, contaDestino, valor, dataAgendamento, taxa, status);
         this.id = id;
         this.contaOrigem = contaOrigem;
         this.contaDestino = contaDestino;
         this.valor = valor;
         this.dataAgendamento = dataAgendamento;
+        this.taxa = taxa;
         this.status = status;
     }
 
-    public static Transferencia create(UUID id, Conta contaOrigem, Conta contaDestino, Double valor, LocalDate dataAgendamento, StatusTransferencia status) {
-        final UUID uuid = UUID.randomUUID();
-        return new Transferencia(uuid, contaOrigem, contaDestino, valor, dataAgendamento, status);
+    public Transferencia(Conta contaOrigem, Conta contaDestino, BigDecimal valor, LocalDate dataAgendamento, BigDecimal taxa, StatusTransferencia status) {
+        validate(contaOrigem, contaDestino, valor, dataAgendamento, taxa, status);
+        this.contaOrigem = contaOrigem;
+        this.contaDestino = contaDestino;
+        this.valor = valor;
+        this.dataAgendamento = dataAgendamento;
+        this.taxa = taxa;
+        this.status = status;
     }
 
-    private void validate(UUID id, Conta contaOrigem, Conta contaDestino, Double valor, LocalDate dataAgendamento, StatusTransferencia status) {
-        if (id == null) {
-            throw new IllegalArgumentException("ID nao pode ser nulo");
-        }
+    public static Transferencia create(Conta contaOrigem, Conta contaDestino, BigDecimal valor, LocalDate dataAgendamento, BigDecimal taxa, StatusTransferencia status) {
+        return new Transferencia(contaOrigem, contaDestino, valor, dataAgendamento, taxa, status);
+    }
+
+    private void validate(Conta contaOrigem, Conta contaDestino, BigDecimal valor, LocalDate dataAgendamento, BigDecimal taxa, StatusTransferencia status) {
         if (contaOrigem == null) {
             throw new IllegalArgumentException("Conta de origem nao pode ser nula");
         }
         if (contaDestino == null) {
             throw new IllegalArgumentException("Conta de destino nao pode ser nula");
         }
-        if (valor == null || valor <= 0) {
+        if (valor == null) {
             throw new IllegalArgumentException("Valor deve ser maior que zero");
         }
         if (dataAgendamento == null) {
@@ -45,13 +53,17 @@ public class Transferencia {
         if (status == null) {
             throw new IllegalArgumentException("Status nao pode ser nulo");
         }
+
+        if (taxa == null) {
+            throw new IllegalArgumentException("Taxa nao pode ser nula");
+        }
     }
 
-    public UUID getId() {
+    public Long getId() {
         return id;
     }
 
-    public void setId(UUID id) {
+    public void setId(Long id) {
         this.id = id;
     }
 
@@ -71,11 +83,11 @@ public class Transferencia {
         this.contaDestino = contaDestino;
     }
 
-    public Double getValor() {
+    public BigDecimal getValor() {
         return valor;
     }
 
-    public void setValor(Double valor) {
+    public void setValor(BigDecimal valor) {
         this.valor = valor;
     }
 
@@ -93,6 +105,14 @@ public class Transferencia {
 
     public void setStatus(StatusTransferencia status) {
         this.status = status;
+    }
+
+    public BigDecimal getTaxa() {
+        return taxa;
+    }
+
+    public void setTaxa(BigDecimal taxa) {
+        this.taxa = taxa;
     }
 }
 
