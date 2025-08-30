@@ -1,0 +1,10 @@
+INSERT INTO contas (id, numero, saldo) VALUES (1, 1000000001, 5000.00);
+INSERT INTO contas (id, numero, saldo) VALUES (2, 1000000002, 3000.00);
+INSERT INTO contas (id, numero, saldo) VALUES (3, 1000000003, 1500.00);
+INSERT INTO contas (id, numero, saldo) VALUES (4, 1000000004, 2000.00);
+INSERT INTO contas (id, numero, saldo) VALUES (5, 1000000005, 4500.00);
+INSERT INTO contas (id, numero, saldo) VALUES (6, 1000000006, 6000.00);
+INSERT INTO contas (id, numero, saldo) VALUES (7, 1000000007, 3500.00);
+INSERT INTO contas (id, numero, saldo) VALUES (8, 1000000008, 2800.00);
+INSERT INTO contas (id, numero, saldo) VALUES (9, 1000000009, 4000.00);
+INSERT INTO contas (id, numero, saldo) VALUES (10, 1000000010, 5200.00);
