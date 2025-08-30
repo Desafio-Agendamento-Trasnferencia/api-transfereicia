@@ -4,12 +4,8 @@ import desafio.apitranferencia.domain.model.Conta;
 import lombok.Getter;
 import lombok.Setter;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.Id;
-import javax.persistence.Table;
+import javax.persistence.*;
 import java.math.BigDecimal;
-import java.util.UUID;
 
 @Entity
 @Table(name = "contas")
@@ -18,10 +14,11 @@ import java.util.UUID;
 public class ContaEntity {
 
     @Id
-    private UUID id;
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id;
 
     @Column(nullable = false, unique = true)
-    private String numero;
+    private Long numero;
 
     @Column(nullable = false)
     private BigDecimal saldo;

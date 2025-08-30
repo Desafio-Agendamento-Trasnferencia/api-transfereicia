@@ -8,7 +8,6 @@ import lombok.Setter;
 import javax.persistence.*;
 import java.math.BigDecimal;
 import java.time.LocalDate;
-import java.util.UUID;
 
 @Entity
 @Getter
@@ -17,7 +16,8 @@ import java.util.UUID;
 public class TransferenciaEntity {
 
     @Id
-    private UUID id;
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id;
 
     @ManyToOne(optional = false)
     @JoinColumn(name = "conta_origem_id")
@@ -43,24 +43,26 @@ public class TransferenciaEntity {
     public TransferenciaEntity() {
     }
 
-    public TransferenciaEntity toEntity(Transferencia transferencia) {
+    public static TransferenciaEntity toEntity(Transferencia transferencia) {
         TransferenciaEntity entity = new TransferenciaEntity();
         entity.setId(transferencia.getId());
         entity.setContaOrigem(new ContaEntity().toEntity(transferencia.getContaOrigem()));
         entity.setContaDestino(new ContaEntity().toEntity(transferencia.getContaDestino()));
-        entity.setValor(BigDecimal.valueOf(transferencia.getValor()));
+        entity.setValor(transferencia.getValor());
         entity.setDataAgendamento(transferencia.getDataAgendamento());
+        entity.setTaxa(transferencia.getTaxa());
         entity.setStatus(transferencia.getStatus());
         return entity;
     }
 
-    public Transferencia toDomain(){
+    public Transferencia toDomain() {
         return new Transferencia(
                 this.id,
                 this.contaOrigem.toDomain(),
                 this.contaDestino.toDomain(),
-                this.valor.doubleValue(),
+                this.valor,
                 this.dataAgendamento,
+                this.taxa,
                 this.status
         );
     }
