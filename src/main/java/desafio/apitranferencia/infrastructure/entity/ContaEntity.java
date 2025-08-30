@@ -1,6 +1,6 @@
 package desafio.apitranferencia.infrastructure.entity;
 
-import desafio.apitranferencia.domain.Conta;
+import desafio.apitranferencia.domain.model.Conta;
 import lombok.Getter;
 import lombok.Setter;
 

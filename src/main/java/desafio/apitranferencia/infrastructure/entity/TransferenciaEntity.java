@@ -1,7 +1,7 @@
 package desafio.apitranferencia.infrastructure.entity;
 
-import desafio.apitranferencia.domain.StatusTransferencia;
-import desafio.apitranferencia.domain.Transferencia;
+import desafio.apitranferencia.domain.model.StatusTransferencia;
+import desafio.apitranferencia.domain.model.Transferencia;
 import lombok.Getter;
 import lombok.Setter;
 

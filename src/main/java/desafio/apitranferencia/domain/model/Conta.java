@@ -1,4 +1,4 @@
-package desafio.apitranferencia.domain;
+package desafio.apitranferencia.domain.model;
 
 import java.math.BigDecimal;
 import java.util.UUID;
