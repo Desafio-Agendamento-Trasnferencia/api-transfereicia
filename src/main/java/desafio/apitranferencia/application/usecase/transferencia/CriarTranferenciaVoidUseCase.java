@@ -66,7 +66,9 @@ public class CriarTranferenciaVoidUseCase extends VoidUseCase<CriarTransferencia
 
     private void verificarSaldo(BigDecimal valorComTaxa, Long contaOrigem) {
         final BigDecimal saldoContaOrigem = contaGateway.consultarSaldo(contaOrigem);
-        if (saldoContaOrigem.compareTo(valorComTaxa) < 0) {
+        final BigDecimal valoresAPagar = transferenciaGateway.consultarValoresAPagar(contaOrigem);
+        final BigDecimal saldoDisponivel = saldoContaOrigem.subtract(valoresAPagar);
+        if (saldoDisponivel.compareTo(valorComTaxa) < 0) {
             throw new SaldoInsuficienteException("Saldo insuficiente na conta de origem.");
         }
     }
