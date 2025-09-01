@@ -8,6 +8,8 @@ import desafio.apitranferencia.infrastructure.gateway.repository.ContaRepository
 import org.springframework.stereotype.Service;
 
 import java.math.BigDecimal;
+import java.util.List;
+import java.util.stream.Collectors;
 
 @Service
 public class ContaGatewayImpl implements ContaGateway {
@@ -59,5 +61,12 @@ public class ContaGatewayImpl implements ContaGateway {
     @Override
     public Long consuntarIdDaConta(Long numeroConta) {
         return contaRepository.findByNumero(numeroConta).toDomain().getId();
+    }
+
+    @Override
+    public List<Conta> listarContas() {
+        return contaRepository.findAll().stream()
+                .map(ContaEntity::toDomain)
+                .collect(Collectors.toList());
     }
 }

@@ -8,6 +8,7 @@ import lombok.Setter;
 import javax.persistence.*;
 import java.math.BigDecimal;
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 
 @Entity
 @Getter
@@ -34,6 +35,9 @@ public class TransferenciaEntity {
     private LocalDate dataAgendamento;
 
     @Column(nullable = false)
+    private LocalDateTime dataTransferencia;
+
+    @Column(nullable = false)
     @Enumerated(EnumType.STRING)
     private StatusTransferencia status;
 
@@ -44,12 +48,13 @@ public class TransferenciaEntity {
     }
 
     public static TransferenciaEntity toEntity(Transferencia transferencia) {
-        TransferenciaEntity entity = new TransferenciaEntity();
+        final TransferenciaEntity entity = new TransferenciaEntity();
         entity.setId(transferencia.getId());
         entity.setContaOrigem(new ContaEntity().toEntity(transferencia.getContaOrigem()));
         entity.setContaDestino(new ContaEntity().toEntity(transferencia.getContaDestino()));
         entity.setValor(transferencia.getValor());
         entity.setDataAgendamento(transferencia.getDataAgendamento());
+        entity.setDataTransferencia(transferencia.getDataTransferencia());
         entity.setTaxa(transferencia.getTaxa());
         entity.setStatus(transferencia.getStatus());
         return entity;
@@ -62,6 +67,7 @@ public class TransferenciaEntity {
                 this.contaDestino.toDomain(),
                 this.valor,
                 this.dataAgendamento,
+                this.dataTransferencia,
                 this.taxa,
                 this.status
         );
