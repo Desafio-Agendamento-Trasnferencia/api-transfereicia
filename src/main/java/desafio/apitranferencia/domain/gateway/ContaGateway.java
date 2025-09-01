@@ -1,6 +1,9 @@
 package desafio.apitranferencia.domain.gateway;
 
+import desafio.apitranferencia.domain.model.Conta;
+
 import java.math.BigDecimal;
+import java.util.List;
 
 public interface ContaGateway {
 
@@ -13,4 +16,6 @@ public interface ContaGateway {
     void creditar(Long contaDestino, BigDecimal valor);
 
     Long consuntarIdDaConta(Long numeroConta);
+
+    List<Conta> listarContas();
 }
