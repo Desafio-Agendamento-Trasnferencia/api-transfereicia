@@ -42,24 +42,12 @@ public class Conta {
         return id;
     }
 
-    public void setId(Long id) {
-        this.id = id;
-    }
-
     public Long getNumero() {
         return numero;
     }
 
-    public void setNumero(Long numero) {
-        this.numero = numero;
-    }
-
     public BigDecimal getSaldo() {
         return saldo;
-    }
-
-    public void setSaldo(BigDecimal saldo) {
-        this.saldo = saldo;
     }
 }
 

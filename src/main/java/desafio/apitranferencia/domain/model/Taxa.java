@@ -43,6 +43,8 @@ public enum Taxa {
                 return taxa;
             }
         }
-        throw new IllegalArgumentException("Nenhuma taxa configurada para " + dias + " dias");
+        throw new IllegalArgumentException(
+                "O agendamento não pode ultrapassar 50 dias. Você tentou agendar para " + dias + " dias."
+        );
     }
 }

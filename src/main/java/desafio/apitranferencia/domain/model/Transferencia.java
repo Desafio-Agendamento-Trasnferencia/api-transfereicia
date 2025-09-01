@@ -2,39 +2,44 @@ package desafio.apitranferencia.domain.model;
 
 import java.math.BigDecimal;
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 
 public class Transferencia {
-    Long id;
-    Conta contaOrigem;
-    Conta contaDestino;
-    BigDecimal valor;
-    LocalDate dataAgendamento;
-    BigDecimal taxa;
-    StatusTransferencia status;
+    private Long id;
+    private Conta contaOrigem;
+    private Conta contaDestino;
+    private BigDecimal valor;
+    private LocalDate dataAgendamento;
+    private LocalDateTime dataTransferencia;
+    private BigDecimal taxa;
+    private StatusTransferencia status;
 
-    public Transferencia(Long id, Conta contaOrigem, Conta contaDestino, BigDecimal valor, LocalDate dataAgendamento, BigDecimal taxa, StatusTransferencia status) {
+    public Transferencia(Long id, Conta contaOrigem, Conta contaDestino, BigDecimal valor, LocalDate dataAgendamento, LocalDateTime dataTransferencia, BigDecimal taxa, StatusTransferencia status) {
         validate(contaOrigem, contaDestino, valor, dataAgendamento, taxa, status);
         this.id = id;
         this.contaOrigem = contaOrigem;
         this.contaDestino = contaDestino;
         this.valor = valor;
         this.dataAgendamento = dataAgendamento;
+        this.dataTransferencia = dataTransferencia;
         this.taxa = taxa;
         this.status = status;
     }
 
-    public Transferencia(Conta contaOrigem, Conta contaDestino, BigDecimal valor, LocalDate dataAgendamento, BigDecimal taxa, StatusTransferencia status) {
+    public Transferencia(Conta contaOrigem, Conta contaDestino, BigDecimal valor, LocalDate dataAgendamento, LocalDateTime dataTransferencia, BigDecimal taxa, StatusTransferencia status) {
         validate(contaOrigem, contaDestino, valor, dataAgendamento, taxa, status);
         this.contaOrigem = contaOrigem;
         this.contaDestino = contaDestino;
         this.valor = valor;
         this.dataAgendamento = dataAgendamento;
+        this.dataTransferencia = dataTransferencia;
         this.taxa = taxa;
         this.status = status;
     }
 
     public static Transferencia create(Conta contaOrigem, Conta contaDestino, BigDecimal valor, LocalDate dataAgendamento, BigDecimal taxa, StatusTransferencia status) {
-        return new Transferencia(contaOrigem, contaDestino, valor, dataAgendamento, taxa, status);
+        final LocalDateTime dataTransferencia = LocalDateTime.now();
+        return new Transferencia(contaOrigem, contaDestino, valor, dataAgendamento, dataTransferencia, taxa, status);
     }
 
     private void validate(Conta contaOrigem, Conta contaDestino, BigDecimal valor, LocalDate dataAgendamento, BigDecimal taxa, StatusTransferencia status) {
@@ -63,10 +68,6 @@ public class Transferencia {
         return id;
     }
 
-    public void setId(Long id) {
-        this.id = id;
-    }
-
     public Conta getContaOrigem() {
         return contaOrigem;
     }
@@ -79,40 +80,24 @@ public class Transferencia {
         return contaDestino;
     }
 
-    public void setContaDestino(Conta contaDestino) {
-        this.contaDestino = contaDestino;
-    }
-
     public BigDecimal getValor() {
         return valor;
-    }
-
-    public void setValor(BigDecimal valor) {
-        this.valor = valor;
     }
 
     public LocalDate getDataAgendamento() {
         return dataAgendamento;
     }
 
-    public void setDataAgendamento(LocalDate dataAgendamento) {
-        this.dataAgendamento = dataAgendamento;
+    public LocalDateTime getDataTransferencia() {
+        return dataTransferencia;
     }
 
     public StatusTransferencia getStatus() {
         return status;
     }
 
-    public void setStatus(StatusTransferencia status) {
-        this.status = status;
-    }
-
     public BigDecimal getTaxa() {
         return taxa;
-    }
-
-    public void setTaxa(BigDecimal taxa) {
-        this.taxa = taxa;
     }
 }
 
