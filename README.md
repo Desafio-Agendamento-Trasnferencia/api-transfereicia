@@ -1,5 +1,24 @@
 # Backend - Sistema de Agendamento de Transferências
 
+## Estrutura Arquitetural
+
+### O backend foi desenvolvido em Java 11 utilizando o Spring Boot 2.7.18, com banco de dados H2 em memória para facilitar os testes.
+### A arquitetura segue princípios da Arquitetura Hexagonal (Ports and Adapters), separando responsabilidades em diferentes camadas:
+
+- domain 
+  - Contém as entidades de negócio e enums. É o coração da aplicação, isolado de frameworks e detalhes técnicos.
+
+- usecase (application layer)
+  - Implementa os casos de uso do sistema (regras de negócio). Essa camada orquestra as operações utilizando as entidades do domínio.
+
+- infra (infrastructure layer)
+  - Contém implementações técnicas como repositórios, integração com banco de dados (Spring Data JPA) e configurações.
+
+- web (adapter layer)
+  - Expõe a API REST utilizando Spring Web. Atua como a porta de entrada para comunicação externa.
+
+Benefício: Essa separação facilita a manutenção, a testabilidade e permite trocar tecnologias (ex: mudar banco de dados ou framework web) sem impactar o domínio.
+
 ## Tecnologias utilizadas
 - Java 11
 - Spring Boot 2.7.18
